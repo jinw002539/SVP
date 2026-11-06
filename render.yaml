@@ -1,0 +1,69 @@
+# Blueprint do Render: cria o serviço web a partir do Dockerfile do repositório.
+# A base de dados NÃO é criada aqui (usamos uma externa, ex.: Aiven MySQL).
+services:
+  - type: web
+    name: igreja-avisos
+    runtime: docker
+    plan: free
+    healthCheckPath: /up
+    autoDeploy: true          # cada push para a branch main faz deploy automático
+    envVars:
+      - key: PORT
+        value: "8080"
+      - key: APP_NAME
+        value: Comunidade São Vicente de Paulo
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_TIMEZONE
+        value: Africa/Maputo
+      - key: APP_LOCALE
+        value: pt
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: LOG_LEVEL
+        value: warning
+      - key: SESSION_DRIVER
+        value: database
+      - key: SESSION_SECURE_COOKIE
+        value: "true"
+      - key: SESSION_ENCRYPT
+        value: "true"
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: DB_CONNECTION
+        value: mysql
+      - key: MYSQL_ATTR_SSL_CA
+        value: /var/www/html/docker/ca.pem
+      - key: UPLOADS_DRIVER
+        value: s3
+      # Os valores abaixo preenches no painel do Render (sync: false = não ficam no GitHub):
+      - key: APP_KEY
+        sync: false
+      - key: APP_URL
+        sync: false
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        sync: false
+      - key: DB_DATABASE
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: UPLOADS_KEY
+        sync: false
+      - key: UPLOADS_SECRET
+        sync: false
+      - key: UPLOADS_BUCKET
+        sync: false
+      - key: UPLOADS_ENDPOINT
+        sync: false
+      - key: UPLOADS_URL
+        sync: false
+      - key: VITE_WHATSAPP_NUMERO
+        sync: false

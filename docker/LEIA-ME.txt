@@ -1,0 +1,4 @@
+Coloque aqui o ficheiro ca.pem (certificado da base de dados Aiven).
+Aiven Console > o seu serviço MySQL > Overview > "CA certificate" > Download.
+O certificado é público (não é segredo) e pode ir para o GitHub.
+Sem ele, a ligação à base de dados falha com erro de SSL.

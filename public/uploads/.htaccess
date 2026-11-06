@@ -1,0 +1,12 @@
+# Esta pasta só serve ficheiros estáticos. Nada de código aqui.
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<FilesMatch "(?i)\.(php|phtml|phar|php[0-9]|pl|py|cgi|sh)$">
+    Require all denied
+</FilesMatch>
+Options -ExecCGI -Indexes
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set Content-Security-Policy "default-src 'none'; img-src 'self'; sandbox"
+</IfModule>
